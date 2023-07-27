@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class = "container shadow w-50 vh-50">
+            <div class = "row justify-content-center"> <!-- Main Container-->
+                <div><!-- Tile -->
+                    <h2>User Form</h2>
+                </div>
+                <div><!-- Info -->
+
+                    <form id="Form"  method="POST" action="/test">
+                        <div><!-- Name -->
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="name" id="name"/>
+                            
+                        </div>
+                        <div> <!-- Email -->
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" id="email"/>
+                        </div>
+                        <div> <!-- Password -->
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" id="password"/>
+                        </div>
+                       
+                        <input type="submit" value="submit" class="btn btn-primary" name="reg_user">
+                    </form>
+                
+                </div>
+            </div>
+        </div>
+        <div class = "container shadow w-50 vh-50" style="margin-top: 5%;"></div>
+            <div class = "row justify-content-center">
+                <label class = "row justify-content-center">API Button</label>
+                <button type="button" class="btn btn-primary w-50" onclick="Call()">API Call</button>
+                <p id="demo" class = "row justify-content-center"></p>
+            </div>
+    </body>
+</html>
+
+<script>
+    async function Call(){
+        var call = "https://api.census.gov/data/2021/acs/acs5?get=NAME,B01001_001E&for=state:";
+        var state = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
+       if( state == 3 ||state == 14 ||state == 7 ||state == 43){
+            state = ((Math.random() * 50) + 1);
+        }; 
+        state.toString();
+        
+        call += state;
+        const response = await fetch(call);
+        document.getElementById("demo").innerHTML = await response.json();
+    }
+</script>
